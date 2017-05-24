@@ -11,7 +11,7 @@ RUN rm -r /usr/share/nginx/www
 
 # Install Wordpress
 RUN cd /usr/share/nginx/ \
-    && git clone https://github.com/magento/magento2.git 
+    && git clone https://github.com/magento/magento2.git magento2 
 
 RUN mv /usr/share/nginx/magento2 /usr/share/nginx/www \
     && chown -R www-data:www-data /usr/share/nginx/www \
