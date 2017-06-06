@@ -5,11 +5,14 @@ MAINTAINER Kevin Nordloh <mail@legendary-server.de>
 RUN apt-get update
 RUN apt-get -y upgrade
 
+# install composer
+RUN apt-get -y install composer
+
 # clean up unneeded packages
 RUN apt-get --purge autoremove -y
 RUN rm -r /usr/share/nginx/www
 
-# Install Wordpress
+# Install magento2
 RUN cd /usr/share/nginx/ \
     && git clone https://github.com/magento/magento2.git magento2 
 
@@ -17,7 +20,11 @@ RUN mv /usr/share/nginx/magento2 /usr/share/nginx/www \
     && chown -R www-data:www-data /usr/share/nginx/www \
     && chmod -R 775 /usr/share/nginx/www
 
-# Wordpress Initialization and Startup Script
+# custom settings for magento2
+ADD ./nginx-default.conf /etc/nginx/sites-available/default
+RUN chown -R www-data:www-data /var/lib/php/sessions/
+
+# magento2 initialization and startup script
 ADD ./magento2-start.sh /magento2-start.sh
 RUN chmod 755 /magento2-start.sh
 
