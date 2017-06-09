@@ -10,7 +10,6 @@ RUN apt-get -y install composer
 
 # clean up unneeded packages
 RUN apt-get --purge autoremove -y
-RUN rm -r /usr/share/nginx/www
 
 # custom settings for magento2
 ADD ./nginx-default.conf /etc/nginx/sites-available/default

@@ -14,6 +14,7 @@ if [ ! -f /usr/share/nginx/www/app/etc/env.php ]; then
 cd /usr/share/nginx/ \
     && rm  /usr/share/nginx/www/index.php \
     && git clone https://github.com/magento/magento2.git www \
+    && rm -r www/.git \
     && chown -R www-data:www-data /usr/share/nginx/www \
     && chmod -R 775 /usr/share/nginx/www
 fi
