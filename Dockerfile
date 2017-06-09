@@ -12,14 +12,6 @@ RUN apt-get -y install composer
 RUN apt-get --purge autoremove -y
 RUN rm -r /usr/share/nginx/www
 
-# Install magento2
-RUN cd /usr/share/nginx/ \
-    && git clone https://github.com/magento/magento2.git magento2 
-
-RUN mv /usr/share/nginx/magento2 /usr/share/nginx/www \
-    && chown -R www-data:www-data /usr/share/nginx/www \
-    && chmod -R 775 /usr/share/nginx/www
-
 # custom settings for magento2
 ADD ./nginx-default.conf /etc/nginx/sites-available/default
 RUN chown -R www-data:www-data /var/lib/php/sessions/
