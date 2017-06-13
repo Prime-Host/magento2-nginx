@@ -9,6 +9,10 @@ useradd -m -d /home/$PRIMEHOST_USER -G root -s /bin/bash $PRIMEHOST_USER \
 echo "$PRIMEHOST_USER:$PRIMEHOST_PASSWORD" | chpasswd
 echo "root:$PRIMEHOST_PASSWORD" | chpasswd
 
+# Custom user for nginx and php
+sed -i s/www-data/$PRIMEHOST_USER/g /etc/nginx/nginx.conf
+sed -i s/www-data/$PRIMEHOST_USER/g /etc/php/7.0/fpm/pool.d/www.conf
+
 # Install magento2
 if [ ! -f /usr/share/nginx/www/app/etc/env.php ]; then
 cd /usr/share/nginx/ \
