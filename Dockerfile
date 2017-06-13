@@ -13,7 +13,6 @@ RUN apt-get --purge autoremove -y
 
 # custom settings for magento2
 ADD ./nginx-default.conf /etc/nginx/sites-available/default
-RUN chown -R www-data:www-data /var/lib/php/sessions/
 
 # magento2 initialization and startup script
 ADD ./magento2-start.sh /magento2-start.sh

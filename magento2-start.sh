@@ -15,9 +15,12 @@ cd /usr/share/nginx/ \
     && rm  /usr/share/nginx/www/index.php \
     && git clone https://github.com/magento/magento2.git www \
     && rm -r www/.git \
-    && chown -R www-data:www-data /usr/share/nginx/www \
+    && chown -R $PRIMEHOST_USER:$PRIMEHOST_USER /usr/share/nginx/www \
     && chmod -R 775 /usr/share/nginx/www
 fi
+
+# special permissions for magento2
+chown -R $PRIMEHOST_USER:$PRIMEHOST_USER /var/lib/php/sessions/
 
 # start all services
 /usr/local/bin/supervisord -n -c /etc/supervisord.conf
