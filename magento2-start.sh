@@ -12,7 +12,6 @@ echo "root:$PRIMEHOST_PASSWORD" | chpasswd
 # Install magento2
 if [ ! -f /usr/share/nginx/www/app/etc/env.php ]; then
 cd /usr/share/nginx/ \
-    && rm  /usr/share/nginx/www/index.php \
     && git clone https://github.com/magento/magento2.git www \
     && rm -r www/.git \
     && chown -R $PRIMEHOST_USER:$PRIMEHOST_USER /usr/share/nginx/www \
