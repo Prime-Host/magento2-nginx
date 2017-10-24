@@ -16,11 +16,12 @@ sed -i s/www-data/$PRIMEHOST_USER/g /etc/php/7.0/fpm/pool.d/www.conf
 # Install magento2
 if [ ! -f /usr/share/nginx/www/app/etc/env.php ]; then
 cd /usr/share/nginx/ \
-    && git clone https://github.com/magento/magento2.git www \
-    && rm -r www/.git \
-    && chown -R $PRIMEHOST_USER:$PRIMEHOST_USER /usr/share/nginx/www \
-    && chmod -R 775 /usr/share/nginx/www
+    && git clone -b 2.2 https://github.com/magento/magento2.git www \
+    && rm -r www/.git
 fi
+
+# set custom user for magento files
+chown -R $PRIMEHOST_USER:$PRIMEHOST_USER /usr/share/nginx/www
 
 # special permissions for magento2
 chown -R $PRIMEHOST_USER:$PRIMEHOST_USER /var/lib/php/sessions/

@@ -6,7 +6,7 @@ RUN apt-get update
 RUN apt-get -y upgrade
 
 # install composer
-RUN apt-get -y install composer
+RUN apt-get -y install composer php7.0-soap
 
 # clean up unneeded packages
 RUN apt-get --purge autoremove -y
