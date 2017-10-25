@@ -26,5 +26,9 @@ chown -R $PRIMEHOST_USER:$PRIMEHOST_USER /usr/share/nginx/www
 # special permissions for magento2
 chown -R $PRIMEHOST_USER:$PRIMEHOST_USER /var/lib/php/sessions/
 
+# composer install
+cd /usr/share/nginx/www
+su -c "composer install" -m "$PRIMEHOST_USER"
+
 # start all services
 /usr/local/bin/supervisord -n -c /etc/supervisord.conf
