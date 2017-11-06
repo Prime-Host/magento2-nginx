@@ -30,5 +30,12 @@ chown -R $PRIMEHOST_USER:$PRIMEHOST_USER /var/lib/php/sessions/
 cd /usr/share/nginx/www
 su -c "composer install" -m "$PRIMEHOST_USER"
 
+# insert cronjob
+sudo -u $PRIMEHOST_USER bash << EOF
+crontab -l | { cat; echo "* * * * * php /usr/share/nginx/www/bin/magento cron:run | grep -v 'Ran jobs by schedule' >> /usr/share/nginx/www/var/log/magento.cron.log"; } | crontab -
+crontab -l | { cat; echo "* * * * * php /usr/share/nginx/www/update/cron.php >> /usr/share/nginx/www/var/log/update.cron.log"; } | crontab -
+crontab -l | { cat; echo "* * * * * php /usr/share/nginx/www/bin/magento setup:cron:run >> /usr/share/nginx/www/var/log/setup.cron.log"; } | crontab -
+EOF
+
 # start all services
 /usr/local/bin/supervisord -n -c /etc/supervisord.conf
