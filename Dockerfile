@@ -15,7 +15,7 @@ RUN apt-get --purge autoremove -y
 ADD ./nginx-default.conf /etc/nginx/sites-available/default
 
 # magento2 initialization and startup script
-ADD ./magento2-start.sh /magento2-start.sh
-RUN chmod 755 /magento2-start.sh
+ADD ./magento2-start.sh /root/container-scripts/prime-host/magento2-start.sh
+RUN chmod 755 /root/container-scripts/prime-host/magento2-start.sh
 
-CMD ["/bin/bash", "/magento2-start.sh"]
+CMD ["/bin/bash", "/root/container-scripts/prime-host/magento2-start.sh"]
