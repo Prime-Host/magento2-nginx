@@ -16,14 +16,11 @@ sed -i s/www-data/$PRIMEHOST_USER/g /etc/php/7.0/fpm/pool.d/www.conf
 # Remove index.php
 rm /usr/share/nginx/www/index.php
 
-# Install magento2
+# Download magento2
 if [ ! -f /usr/share/nginx/www/app/etc/env.php ]; then
 cd /usr/share/nginx/ \
     && git clone -b 2.2 https://github.com/magento/magento2.git www \
     && rm -r www/.git
-
-cd /usr/share/nginx/www/
-su $PRIMEHOST_USER -s /bin/bash -c "php -f bin/magento setup:install --base-url=https://$PRIMEHOST_DOMAIN/ --backend-frontname=admin --db-host=$PRIMEHOST_DOMAIN-db --db-name=magento2 --db-user=root --db-password=$PRIMEHOST_PASSWORD --admin-firstname=Magento --admin-lastname=User --admin-email=$LETSENCRYPT_EMAIL --admin-user=$PRIMEHOST_USER --admin-password=$PRIMEHOST_PASSWORD --language=de_DE --currency=EUR"
 
 # insert cronjob
 sudo -u $PRIMEHOST_USER bash << EOF
@@ -43,6 +40,10 @@ chown -R $PRIMEHOST_USER:$PRIMEHOST_USER /var/lib/php/sessions/
 # composer install
 cd /usr/share/nginx/www
 su -c "composer install" -m "$PRIMEHOST_USER"
+
+# Install magento2
+cd /usr/share/nginx/www/
+su $PRIMEHOST_USER -s /bin/bash -c "php -f bin/magento setup:install --base-url=https://$PRIMEHOST_DOMAIN/ --backend-frontname=admin --db-host=$PRIMEHOST_DOMAIN-db --db-name=magento2 --db-user=root --db-password=$PRIMEHOST_PASSWORD --admin-firstname=Magento --admin-lastname=User --admin-email=$LETSENCRYPT_EMAIL --admin-user=$PRIMEHOST_USER --admin-password=$PRIMEHOST_PASSWORD --language=de_DE --currency=EUR"
 
 # start all services
 /usr/local/bin/supervisord -n -c /etc/supervisord.conf
