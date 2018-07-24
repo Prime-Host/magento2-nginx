@@ -16,8 +16,6 @@ RUN apt-get --purge autoremove -y
 
 # custom nginx settings for magento2
 ADD ./nginx-default.conf /etc/nginx/sites-available/default
-RUN ln -s /etc/nginx/sites-available/magento.conf /etc/nginx/sites-enabled/magento.conf
-ADD ./magento.conf /etc/nginx/sites-enabled/magento.conf
 
 # magento2 initialization and startup script
 ADD ./magento2-start.sh /root/container-scripts/prime-host/magento2-start.sh
