@@ -14,8 +14,9 @@ RUN sed -i -e "s/; max_input_vars\s*=\s*1000/max_input_vars = 1000000/g" /etc/ph
 # clean up unneeded packages
 RUN apt-get --purge autoremove -y
 
-# custom settings for magento2
+# custom nginx settings for magento2
 ADD ./nginx-default.conf /etc/nginx/sites-available/default
+ADD ./magento.conf /etc/nginx/sites-available/magento.conf
 
 # magento2 initialization and startup script
 ADD ./magento2-start.sh /root/container-scripts/prime-host/magento2-start.sh
