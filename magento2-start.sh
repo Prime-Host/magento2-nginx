@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create custom ssh_user with sudo privileges
-useradd -m -d /home/$PRIMEHOST_USER -G root -s /bin/bash $PRIMEHOST_USER \
+useradd -m -d /home/$PRIMEHOST_USER -G root -s /bin/zsh $PRIMEHOST_USER \
 	&& usermod -a -G $PRIMEHOST_USER $PRIMEHOST_USER \
 	&& usermod -a -G sudo $PRIMEHOST_USER
 
