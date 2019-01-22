@@ -11,7 +11,7 @@ echo "root:$PRIMEHOST_PASSWORD" | chpasswd
 
 # Custom user for nginx and php
 sed -i s/www-data/$PRIMEHOST_USER/g /etc/nginx/nginx.conf
-sed -i s/www-data/$PRIMEHOST_USER/g /etc/php/7.0/fpm/pool.d/www.conf
+sed -i s/www-data/$PRIMEHOST_USER/g /etc/php/*/fpm/pool.d/www.conf
 
 # Remove index.php
 rm /usr/share/nginx/www/index.php

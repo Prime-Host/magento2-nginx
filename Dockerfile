@@ -1,4 +1,4 @@
-FROM primehost/nginx
+FROM primehost/nginx:php7.1
 MAINTAINER Kevin Nordloh <mail@legendary-server.de>
 
 # update before install
@@ -6,10 +6,10 @@ RUN apt-get update
 RUN apt-get -y upgrade
 
 # install composer
-RUN apt-get -y install composer php7.0-soap
+RUN apt-get -y install composer php7.1-soap
 
 # higher max_input_vars
-RUN sed -i -e "s/; max_input_vars\s*=\s*1000/max_input_vars = 1000000/g" /etc/php/7.0/fpm/php.ini
+RUN sed -i -e "s/; max_input_vars\s*=\s*1000/max_input_vars = 1000000/g" /etc/php/*/fpm/php.ini
 
 # clean up unneeded packages
 RUN apt-get --purge autoremove -y
