@@ -21,14 +21,16 @@ if [ ! -f /usr/share/nginx/www/app/etc/env.php ]; then
 cd /usr/share/nginx/ \
     && git clone -b 2.2 https://github.com/magento/magento2.git www \
     && rm -r www/.git
+fi
 
 # insert cronjob
+if [ ! -f /var/spool/cron/crontabs/$PRIMEHOST_USER ]; then
 sudo -u $PRIMEHOST_USER bash << EOF
-crontab -l | { cat; echo "* * * * * php /usr/share/nginx/www/bin/magento cron:run | grep -v 'Ran jobs by schedule' >> /usr/share/nginx/www/var/log/magento.cron.log"; } | crontab -
-crontab -l | { cat; echo "* * * * * php /usr/share/nginx/www/update/cron.php >> /usr/share/nginx/www/var/log/update.cron.log"; } | crontab -
-crontab -l | { cat; echo "* * * * * php /usr/share/nginx/www/bin/magento setup:cron:run >> /usr/share/nginx/www/var/log/setup.cron.log"; } | crontab -
+crontab -l | { cat; echo "TZ=Europe/Berlin
+SHELL=/bin/bash
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+* * * * * perl -le 'sleep rand 40' && php /usr/share/nginx/www/bin/magento cron:run | grep -v 'Ran jobs by schedule' >> /usr/share/nginx/www/var/log/magento.cron.log && php /usr/share/nginx/www/update/cron.php >> /usr/share/nginx/www/var/log/update.cron.log && php /usr/share/nginx/www/bin/magento setup:cron:run >> /usr/share/nginx/www/var/log/setup.cron.log"; } | crontab -
 EOF
-
 fi
 
 # set custom user for magento files
