@@ -3,7 +3,6 @@ MAINTAINER Kevin Nordloh <mail@legendary-server.de>
 
 # update before install
 RUN apt-get update
-RUN apt-get -y upgrade
 
 # install composer
 RUN apt-get -y install composer php7.1-soap
