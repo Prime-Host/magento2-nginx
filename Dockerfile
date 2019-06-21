@@ -5,7 +5,11 @@ MAINTAINER Kevin Nordloh <mail@legendary-server.de>
 RUN apt-get update
 
 # install composer
+<<<<<<< HEAD
 RUN apt-get -y install composer 
+=======
+RUN apt-get -y install composer
+>>>>>>> a48eab4b378bb65ff1856a366868e58aab683dfe
 
 # higher max_input_vars
 RUN sed -i -e "s/; max_input_vars\s*=\s*1000/max_input_vars = 5000000/g" /etc/php/*/fpm/php.ini
