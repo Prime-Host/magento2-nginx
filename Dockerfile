@@ -8,7 +8,7 @@ RUN apt-get update
 RUN apt-get -y install composer
 
 # higher max_input_vars
-RUN sed -i -e "s/; max_input_vars\s*=\s*1000/max_input_vars = 1000000/g" /etc/php/*/fpm/php.ini
+RUN sed -i -e "s/; max_input_vars\s*=\s*1000/max_input_vars = 5000000/g" /etc/php/*/fpm/php.ini
 
 # clean up unneeded packages
 RUN apt-get --purge autoremove -y
