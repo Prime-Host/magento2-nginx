@@ -5,7 +5,7 @@ MAINTAINER Kevin Nordloh <mail@legendary-server.de>
 RUN apt-get update
 
 # install composer
-RUN apt-get -y install composer php7.1-soap
+RUN apt-get -y install composer
 
 # higher max_input_vars
 RUN sed -i -e "s/; max_input_vars\s*=\s*1000/max_input_vars = 1000000/g" /etc/php/*/fpm/php.ini
