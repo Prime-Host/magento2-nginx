@@ -9,8 +9,9 @@ useradd -m -d /home/$PRIMEHOST_USER -G root -s /bin/zsh $PRIMEHOST_USER \
 echo "$PRIMEHOST_USER:$PRIMEHOST_PASSWORD" | chpasswd
 echo "root:$PRIMEHOST_PASSWORD" | chpasswd
 
-# Custom user for nginx and php
+# Custom user for nginx and php, disable access.log
 sed -i s/www-data/$PRIMEHOST_USER/g /etc/nginx/nginx.conf
+sed -i s_/var/log/nginx/access.log_off_g /etc/nginx/nginx.conf
 sed -i s/www-data/$PRIMEHOST_USER/g /etc/php/*/fpm/pool.d/www.conf
 
 # Remove index.php
