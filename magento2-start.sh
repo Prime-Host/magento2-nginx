@@ -26,6 +26,7 @@ fi
 
 # Enviroment Variables for cronjob and backup folder
 printenv > /etc/environment
+sed -i s,/root,/home/$PRIMEHOST_USER,g /etc/environment
 if [ ! -f /home/$PRIMEHOST_USER/backup ]; then
     mkdir /home/$PRIMEHOST_USER/backup
 fi
