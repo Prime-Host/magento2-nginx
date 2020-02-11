@@ -1,0 +1,12 @@
+/usr/share/nginx/www/var/log/*.log {
+	rotate 30
+	daily
+	missingok
+	notifempty
+	dateext
+	dateformat "-%Y%m%d-%s"
+	create 0640 unizell unizell
+	compress
+	delaycompress
+	olddir /usr/share/nginx/www/var/log/old
+}
