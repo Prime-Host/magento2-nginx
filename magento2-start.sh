@@ -14,9 +14,6 @@ sed -i s/www-data/$PRIMEHOST_USER/g /etc/nginx/nginx.conf
 sed -i s_/var/log/nginx/access.log_off_g /etc/nginx/nginx.conf
 sed -i s/www-data/$PRIMEHOST_USER/g /etc/php/*/fpm/pool.d/www.conf
 
-# Remove index.php
-rm /usr/share/nginx/www/index.php
-
 # Enviroment Variables for cronjob and backup folder
 printenv > /etc/environment
 sed -i s,/root,/home/$PRIMEHOST_USER,g /etc/environment
@@ -58,4 +55,5 @@ su $PRIMEHOST_USER -s /bin/bash -c "php -f bin/magento setup:install --base-url=
 fi
 
 # start all services
-/usr/local/bin/supervisord -n -c /etc/supervisord.conf
+#/usr/local/bin/supervisord -n -c /etc/supervisord.conf
+/usr/bin/supervisord -c /etc/supervisord.conf
