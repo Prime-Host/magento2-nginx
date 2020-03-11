@@ -55,5 +55,4 @@ su $PRIMEHOST_USER -s /bin/bash -c "php -f bin/magento setup:install --base-url=
 fi
 
 # start all services
-#/usr/local/bin/supervisord -n -c /etc/supervisord.conf
 /usr/bin/supervisord -c /etc/supervisord.conf
