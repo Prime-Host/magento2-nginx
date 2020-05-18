@@ -9,10 +9,6 @@ RUN apt-get -y install composer logrotate
 
 # higher max_input_vars
 RUN sed -i -e "s/; max_input_vars\s*=\s*1000/max_input_vars = 5000000/g" /etc/php/*/fpm/php.ini \
-&& sed -i -e "s/pm = dynamic/pm = ondemand/g" /etc/php/*/fpm/pool.d/www.conf \
-&& sed -i -e "s/pm.max_children = 5/pm.max_children = 32/g" /etc/php/*/fpm/pool.d/www.conf \
-&& sed -i -e "s/;pm.process_idle_timeout = 10s;/pm.process_idle_timeout = 10s;/g" /etc/php/*/fpm/pool.d/www.conf \
-&& sed -i -e "s/;pm.max_requests = 500/pm.max_requests = 500/g" /etc/php/*/fpm/pool.d/www.conf \
 &&  sed -i 's/su root syslog/#su root root/g' /etc/logrotate.conf
 
 # clean up unneeded packages
